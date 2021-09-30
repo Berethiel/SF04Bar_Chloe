@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="row">
+			<h1>{{ title }} beer</h1>
+				<div class="col-sm-6">
+					<div class="card card__beers">
+						<div class="card-body">
+                            <section>
+                                {% for beer in beers %}
+                                    <h3>{{ beer.name|capitalize }}</h3>
+                                    <div>
+                                        <img class="card-img-top" src="{{ asset('build/images/biere.jpg') }}" alt="photo {{ beer.name }}">
+                                    </div>
+                                    <p>{{ beer.description}}</p>
+									{% if beer.publisheAt is defined %}
+										<small>Date de création :
+											{{ beer.publisheAt | date('d-m-Y h:m:s') }}
+										</small>
+									{% endif %}
+									{% if beer.price is defined  %}
+										<p>
+											Price:
+											{{ beer.price }}
+											&euro;
+										</p>
+									{% endif %}
+									{% include 'partials/meta.html.twig' %}
+                                {% endfor %}
+                            </section>
+						</div>
+					</div>
+				</div>
+		</div>
+{% endblock %}

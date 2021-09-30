@@ -1,0 +1,26 @@
+{% if beer.country %}
+	<p>
+        Made in 
+        <a href="{{ path('show_country_beer', { id : beer.country.id })}}">
+			{{beer.country.name|capitalize }}
+		</a>
+	</p>
+{% endif %}
+{% set normals = normal(beer) %}
+{% set specials = special(beer) %}
+{% if normals %}
+    <p>Categorie normale :</p>
+	<ul>
+			{% for category in normals %}
+				<li>{{ category.name|capitalize }}</li>
+			{% endfor %}
+	</ul>
+{% endif %}
+{% if specials %}
+    <p>Categorie(s) speciale(s) :</p>
+	<ul>
+			{% for category in special(beer) %}
+				<li>{{ category.name|capitalize }}</li>
+			{% endfor %}
+	</ul>
+{% endif %}

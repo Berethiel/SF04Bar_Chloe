@@ -1,0 +1,21 @@
+$primary: darken(#428bca, 20%);
+
+@import "~bootstrap/scss/bootstrap";
+
+table {
+    table-layout: fixed;
+    width:90%;
+    border-collapse: collapse;
+    border: 3px solid black;
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+thead th {
+    padding: 20px;
+}
+
+th, td {
+    border: 1px solid black;
+}
