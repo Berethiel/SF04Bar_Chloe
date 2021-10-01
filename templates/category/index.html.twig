@@ -11,7 +11,11 @@
 						<div class="card-body">
                             <section>
                                 {% for beer in beers %}
-								<h3><a href="{{ path('show_beer', { id_beer: beer.id, id_client: app.user.client.id}) }}">{{ beer.name|capitalize }}</a></h3>
+									{% if app.user.client.id is defined %}
+										<h3><a href="{{ path('show_beer', { id_beer: beer.id, id_client: app.user.client.id|default(0)}) }}">{{ beer.name|capitalize }}</a></h3>
+									{% else %}
+									<h3>{{ beer.name|capitalize }}</h3>
+									{% endif %}
                                     <div>
                                         <img class="card-img-top" src="{{ asset('build/images/biere.jpg') }}" alt="photo {{ beer.name }}">
                                     </div>
