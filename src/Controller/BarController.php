@@ -7,7 +7,9 @@ use App\Entity\Category;
 use App\Entity\Client;
 use App\Entity\Country;
 use App\Entity\Statistic;
+use App\Entity\User;
 use App\Form\StatFormType;
+use App\Repository\StatisticRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -86,8 +88,16 @@ class BarController extends AbstractController
         $form= $this->createForm(StatFormType::class,$stat);
 
         $form->handleRequest($request);
+        $isThereStat = false;
 
-        if($form->isSubmitted()) {
+        $repoStat = $this->getDoctrine()->getRepository(Statistic::class);
+        $existStat = $repoStat->searchExistStat($beer,$client);
+        
+        if(count($existStat) !== 0) {
+            $isThereStat = true;
+        }
+
+        if($form->isSubmitted() && $isThereStat !== true) {
             /**
              * @var Statistic $note
              */
@@ -107,6 +117,7 @@ class BarController extends AbstractController
             'controller_name' => 'StatisticController',
             'beer' => $beer,
             'form' => $form -> createView(),
+            'isThereStat' => $isThereStat
         ]);
     }
 }

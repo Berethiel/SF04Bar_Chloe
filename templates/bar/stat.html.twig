@@ -27,7 +27,7 @@
 											&euro;
 										</p>
 									{% endif %}
-									{% if is_granted('ROLE_VISITEUR') %}
+									{% if is_granted('ROLE_VISITEUR') and isThereStat is same as (false) %}
 									    <p>Ajout d'une note à <b>{{ beer.name|capitalize }}</b> :</p>
 									     {{ form(form) }}
 									{% endif %}

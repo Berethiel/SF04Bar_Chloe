@@ -22,19 +22,18 @@ class StatisticRepository extends ServiceEntityRepository
     // /**
     //  * @return Statistic[] Returns an array of Statistic objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function searchExistStat($idBeer,$idClient)
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('s.beer = :val')
+            ->andWhere('s.client = :val2')
+            ->setParameter('val', $idBeer)
+            ->setParameter('val2', $idClient)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Statistic
